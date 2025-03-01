@@ -26,26 +26,22 @@ where \( u \) and \( v \) are parameters that define the surface.
 
 #### **Breaking Down Each Component**  
 1. **\( x \)-Coordinate:**
-   \[
-   x = \ln \left( \frac{1 + u^2 + 2u\cos(v)}{1 + u^2 - 2u\cos(v)} \right)
-   \]
+
+  ![Image](https://github.com/user-attachments/assets/a0e02a9f-dde3-4cb9-b090-177d886d9ebb)
+
    - This part introduces **logarithmic scaling**, making the structure extend outward symmetrically.
    - The numerator and denominator contain trigonometric terms that create the **wave-like distortions**.
    
-2. **\( y \)-Coordinate:**
-   \[
-   y = \ln \left( \frac{1 + u^2 - 2u\sin(v)}{1 + u^2 + 2u\sin(v)} \right)
-   \]
+1. **\( y \)-Coordinate:**
+
+   ![Image](https://github.com/user-attachments/assets/a0e02a9f-dde3-4cb9-b090-177d886d9ebb)
+
    - Similar to the \( x \)-coordinate, this function also has a **logarithm**, causing a **stretching effect**.
    - The use of sine functions adds rotational symmetry.
 
-3. **\( z \)-Coordinate:**
-   \[
-   z = 2 \arctan \left( \frac{2u^2 \sin(2v)}{u^4 - 1} \right)
-   \]
-   - The **arctan function** restricts the height variations, ensuring the surface remains smooth.
-   - The denominator \( u^4 - 1 \) prevents singularities and keeps the surface from blowing up.
-   - The **sin(2v)** term introduces periodicity, making the shape repeat at certain intervals.
+2. **\( z \)-Coordinate:**
+
+   ![Image](https://github.com/user-attachments/assets/0a4e089e-6e08-49f8-bef1-8e57ee5ee5f5)
 
 ---
 
