@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scherk Surface</title>
+    <style>
+        body { 
+        margin: 0; 
+        outline: none;
+        background: #000;
+        -webkit-tap-highlight-color: transparent;
+        }
+        canvas { display: block; }
+        #infoButton {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .info-popup {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            width: 300px;
+            text-align: left;
+            user-select: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <button id="infoButton">&#9432;</button>
+    <div class="info-popup" id="infoPopup">
+        <p style="text-align:center;" ><strong>Scherk Surface</strong></p>
+    <p style="color:pink; text-align: center;">A Scherk surface is a type of minimal surface, meaning it has zero mean curvature at every point. It was discovered by Heinrich Scherk in 1834 while studying complex surfaces in differential geometry. These surfaces arise in mathematical physics and geometry because they describe minimal energy configurations in soap films.</p>
+            <p style="text-align:center;">For Equations visit my Github. Enjoy!</p>
+    </div>
+    <script>
+        let scene, camera, renderer;
+let geometry, material, mesh;
+
+function init() {
+    scene = new THREE.Scene();
+
+    // Space background
+    const starGeometry = new THREE.BufferGeometry();
+    const starVertices = [];
+    const starColors = [];
+    const starColor = new THREE.Color();
+
+    for (let i = 0; i < 1000; i++) {
+        const x = (Math.random() - 0.5) * 100;
+        const y = (Math.random() - 0.5) * 100;
+        const z = (Math.random() - 0.5) * 100;
+        starVertices.push(x, y, z);
+        starColor.setHSL(Math.random(), 1.0, 0.8);
+        starColors.push(starColor.r, starColor.g, starColor.b);
+    }
+
+    starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starVertices, 3));
+    starGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 3));
+    const starMaterial = new THREE.PointsMaterial({ vertexColors: true, size: 0.07});
+    const stars = new THREE.Points(starGeometry, starMaterial);
+    scene.add(stars);
+
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 12;
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    const vertices = [];
+    const colors = [];
+    const color = new THREE.Color();
+    
+    const uStep = 0.1;
+    const vStep = 0.1;
+
+    for (let u = -2; u <= 2; u += uStep) {
+        for (let v = 0; v <= 2 * Math.PI; v += vStep) {
+            const denominator1 = 1 + u * u - 2 * u * Math.cos(v);
+            const denominator2 = 1 + u * u + 2 * u * Math.sin(v);
+            const denominator3 = u * u * u * u - 1;
+            
+            if (denominator1 === 0 || denominator2 === 0 || denominator3 === 0) continue;
+            
+            const num1 = 1 + u * u + 2 * u * Math.cos(v);
+            const num2 = 1 + u * u - 2 * u * Math.sin(v);
+            
+            if (num1 / denominator1 <= 0 || num2 / denominator2 <= 0) continue;
+            
+            const x = Math.log(num1 / denominator1);
+            const y = Math.log(num2 / denominator2);
+            const z = 2 * Math.atan((2 * u * u * Math.sin(2 * v)) / denominator3);
+            
+            vertices.push(x, y, z);
+            color.setHSL((u + 2) / 4, 2.0, 0.5);
+            colors.push(color.r, color.g, color.b);
+        }
+    }
+
+    geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    
+    material = new THREE.PointsMaterial({ vertexColors: true, size: 0.07 });
+    
+    mesh = new THREE.Points(geometry, material);
+    scene.add(mesh);
+
+    animate();
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    mesh.rotation.x += 0.01;
+    mesh.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
+
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+init();
+
+ $("#infoButton").click(function() {
+            $("#infoPopup").fadeToggle();
+        });
+
+    </script>
+</body>
+  </html>
