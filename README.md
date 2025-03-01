@@ -7,7 +7,7 @@ The most famous Scherk surfaces include:
 - The **Scherk saddle tower**, which looks like stacked, wavy layers.  
 - The **doubly periodic Scherk surface**, which extends infinitely in two directions.  
 
-The Scherk surface in your code is a **generalized version**, often referred to as **Scherk’s second surface**, which has a more complex and artistic shape.
+The Scherk surface in this code is a **generalized version**, often referred to as **Scherk’s second surface**, which has a more complex and artistic shape.
 
 ---
 
