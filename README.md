@@ -14,20 +14,14 @@ The Scherk surface in your code is a **generalized version**, often referred to 
 ### **Understanding the Equation in Your Code**  
 The equation used in your code is:
 
-\[
-\begin{cases}
-x = \ln \left( \frac{1 + u^2 + 2u\cos(v)}{1 + u^2 - 2u\cos(v)} \right) \\
-y = \ln \left( \frac{1 + u^2 - 2u\sin(v)}{1 + u^2 + 2u\sin(v)} \right) \\
-z = 2 \arctan \left( \frac{2u^2 \sin(2v)}{u^4 - 1} \right)
-\end{cases}
-\]
+![Image](https://github.com/user-attachments/assets/6ddfdb48-c004-44df-af93-7f88d234d00e)
 
 where \( u \) and \( v \) are parameters that define the surface.
 
 #### **Breaking Down Each Component**  
 1. **\( x \)-Coordinate:**
 
-  ![Image](https://github.com/user-attachments/assets/a0e02a9f-dde3-4cb9-b090-177d886d9ebb)
+  ![Image](https://github.com/user-attachments/assets/ea69db02-d6cd-48c3-987f-5be678163f19)
 
    - This part introduces **logarithmic scaling**, making the structure extend outward symmetrically.
    - The numerator and denominator contain trigonometric terms that create the **wave-like distortions**.
